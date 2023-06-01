@@ -34,7 +34,7 @@
 }
 
 .ex-info-val {
-    color: black;
+    color: rgb(251, 248, 248);
 }
 
 .ex-info {
@@ -549,7 +549,7 @@ nav {
 .stake-ea {
     font-size: 25px;
     line-height: 1.1;
-    color: black;
+    color: rgb(239, 230, 230);
 }
 
 .primary {
@@ -732,7 +732,7 @@ nav {
 }
 
 .total-val {
-    color: black;
+    color: rgb(238, 236, 236);
     font-size: 20px;
     display: flex;
     align-items: center;
@@ -838,7 +838,7 @@ nav {
 
 .earning-val span,
 .st-sta span {
-    color: black;
+    color: rgb(250, 248, 248);
 }
 
 .col-wrap {
@@ -1071,7 +1071,7 @@ li {
 }
 
 .stake-header {
-    color: rgb(0 0 0/1);
+    color: rgb(242, 240, 240);
     font-weight: 600;
     line-height: 1.5;
     text-transform: uppercase;
@@ -1085,7 +1085,7 @@ li {
     border-radius: 16px;
     box-shadow: rgba(207, 46, 46, 0.1) 0px 2px 2px -1px inset;
     padding: 16px;
-    color: rgb(0 0 0/1);
+    color: rgb(237, 235, 235);
     width: 100%;
     text-align: right;
     outline: none;
@@ -1109,7 +1109,7 @@ li {
 }
 
 .ba-value {
-    color: black;
+    color: rgb(248, 244, 244);
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
