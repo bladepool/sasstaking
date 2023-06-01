@@ -685,7 +685,7 @@ li {
 .modal-content {
     width: 345px;
     overflow: hidden;
-    background: rgb(7, 7, 7);
+    background: rgb(16, 9, 225);
     box-shadow: rgba(14, 14, 44, 0.1) 0px 20px 36px -8px, rgba(250, 248, 248, 0.05) 0px 1px 1px;
     border: 1px solid rgb(231, 227, 235);
     border-radius: 32px;
@@ -696,7 +696,7 @@ li {
 .modal-header {
     display: flex;
     align-items: center;
-    background: linear-gradient(111.68deg, #f2ecf2 0%, rgb(161, 15, 229) 100%);
+    background: linear-gradient(111.68deg, #e606e6 0%, rgb(161, 15, 229) 100%);
     border-bottom: 1px solid rgb(231, 227, 235);
     padding: 12px 24px;
 }
@@ -806,13 +806,13 @@ li {
 
 .btn-getmore {
     border: 2px solid #00AEEF;
-    background-color: white;
+    background-color: rgb(50, 18, 228);
     color: #00AEEF;
 }
 
 .btn-unstake {
     background-color: rgb(233, 234, 235);
-    color: rgb(189, 194, 196);
+    color: rgb(19, 16, 213);
     border: 0px;
 }
 
