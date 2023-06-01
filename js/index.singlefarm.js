@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
 
 async function mainContractInfo() {
     if (NETID == 42161) {
-        web3 = new Web3('hhttps://arb1.croswap.com/rpc');
+        web3 = new Web3('https://arb1.croswap.com/rpc');
     } else {
         web3 = new Web3('https://arb1.arbitrum.io/rpc');
     }
