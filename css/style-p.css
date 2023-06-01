@@ -685,8 +685,8 @@ li {
 .modal-content {
     width: 345px;
     overflow: hidden;
-    background: rgb(255, 255, 255);
-    box-shadow: rgba(14, 14, 44, 0.1) 0px 20px 36px -8px, rgba(0, 0, 0, 0.05) 0px 1px 1px;
+    background: rgb(7, 7, 7);
+    box-shadow: rgba(14, 14, 44, 0.1) 0px 20px 36px -8px, rgba(250, 248, 248, 0.05) 0px 1px 1px;
     border: 1px solid rgb(231, 227, 235);
     border-radius: 32px;
     max-height: 100vh;
@@ -696,7 +696,7 @@ li {
 .modal-header {
     display: flex;
     align-items: center;
-    background: linear-gradient(111.68deg, rgb(242, 236, 242) 0%, rgb(232, 242, 246) 100%);
+    background: linear-gradient(111.68deg, #f2ecf2 0%, rgb(161, 15, 229) 100%);
     border-bottom: 1px solid rgb(231, 227, 235);
     padding: 12px 24px;
 }
@@ -790,7 +790,7 @@ li {
     outline: 0px;
     height: 42px;
     padding: 0px 24px;
-    color: rgb(255, 255, 255);
+    color: rgb(155, 6, 6);
     width: 100%;
     align-items: center;
     border-radius: 16px;

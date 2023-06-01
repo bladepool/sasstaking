@@ -264,7 +264,7 @@ input::-webkit-inner-spin-button {
 }
 
 .modal-body .currency-img:hover {
-    background: rgb(243, 240, 240), 240);
+    background: rgb(202, 5, 5), 240);
 }
 
 .table-content input:focus,
@@ -901,7 +901,7 @@ nav {
 }
 
 .btn-modal.btn-getmore:hover {
-	color: rgb(207, 46, 188);
+	color: rgb(168, 17, 191);
 	border : 2px solid rgba(204, 46, 207, 0.8);
 }
 
@@ -1025,7 +1025,7 @@ li {
 .modal-content {
     width: 345px;
     overflow: hidden;
-    background-color: rgba(255 239 231/1);
+    background-color: rgb(246, 244, 249);
     box-shadow: 0 0 #0000, 0 0 #0000, 1px 0px 5px 0px hsl(0deg 0% 100% / 75%);
     /* border: 2px solid rgba(199, 199, 199, 0.75); */
     border-radius: 32px;
@@ -1045,7 +1045,7 @@ li {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.1;
-    color: rgb(251, 250, 250);
+    color: rgb(243, 234, 234);
 }
 
 .close-mo {
