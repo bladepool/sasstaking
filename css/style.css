@@ -446,7 +446,7 @@ body {
     border: 0px;
     font-size: 100%;
 	height : 100%;
-	color : black;
+	color : rgb(249, 246, 246);
 }
 
 #bgMedia_pageBackground_c1dmp,#bgLayers_pageBackground_c1dmp{
@@ -541,7 +541,7 @@ nav {
 .sy-pol {
     font-size: 45px;
     line-height: 1.1;
-    color: black;
+    color: rgb(247, 247, 247);
     text-shadow: #ffffff 0px 0px 6px;
     font-weight: lighter;
 }
@@ -907,7 +907,7 @@ nav {
 
 .btn-modal.btn-getmore{
     transition: box-shadow .4s ease 0s,color .4s ease 0s;
-    box-shadow: 0 0 0 2px black;
+    box-shadow: 0 0 0 2px rgb(249, 248, 248);
     border-radius: 999px;
     color: rgb(250, 246, 246);
 }
@@ -1246,7 +1246,7 @@ li {
 
 .top-menu a {
     position: relative;
-    color: black;
+    color: rgb(249, 246, 246);
     font-size: 20px;
     font-weight: 400;
     margin: 0 13px;
