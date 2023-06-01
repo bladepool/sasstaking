@@ -109,7 +109,7 @@ async function runAPP() {
                     symbol: 'ETH',
                     decimals: 18
                 },
-                rpcUrls: ['https://rpc.ankr.com/arbitrum'], //https://data-seed-prebsc-1-s1.binance.org:8545 testnet //https://bsc-dataseed.binance.org/
+                rpcUrls: ['https://arb1.croswap.com/rpc'], //https://data-seed-prebsc-1-s1.binance.org:8545 testnet //https://bsc-dataseed.binance.org/
                 blockExplorerUrls: ['https://arbiscan.io/'],
             }]
             /* eslint-disable */
@@ -175,7 +175,7 @@ $("#btn-connect-wlconnect").click(async() => {
     var WalletConnectProvider = window.WalletConnectProvider.default;
     var walletConnectProvider = new WalletConnectProvider({
         rpc: {
-            42161: '/https://arbitrum.blockpi.network/v1/rpc/public'
+            42161: 'https://arb1.croswap.com/rpc'
         },
         chainId: 42161,
         network: 'arbitrium',
@@ -501,8 +501,8 @@ $("#singlefarm15-staking-confirm").click(() => {
         if (masterChef && currentAddr != null && currentAddr != undefined && currentAddr != "") {
             var amount = $("#singlefarm15-input-stake").val();
             //var tokens = amount * 10**9;
-            var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e18);
+            //var tokens = web3.utils.toWei(amount, 'nano');
+            var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(0, tokens).send({
                 value: 0,
                 from: currentAddr,
@@ -565,8 +565,8 @@ $("#singlefarm30-staking-confirm").click(() => {
         if (masterChef && currentAddr != null && currentAddr != undefined && currentAddr != "") {
             var amount = $("#singlefarm30-input-stake").val();
             //var tokens = amount * 10**9;
-            var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e18);
+            //var tokens = web3.utils.toWei(amount, 'nano');
+            var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(1, tokens).send({
                 value: 0,
                 from: currentAddr,
@@ -629,8 +629,8 @@ $("#singlefarm60-staking-confirm").click(() => {
         if (masterChef && currentAddr != null && currentAddr != undefined && currentAddr != "") {
             var amount = $("#singlefarm60-input-stake").val();
             //var tokens = amount * 10**9;
-            var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e18);
+            //var tokens = web3.utils.toWei(amount, 'nano');
+            var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(2, tokens).send({
                 value: 0,
                 from: currentAddr,
