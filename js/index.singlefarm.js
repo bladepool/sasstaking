@@ -4,7 +4,7 @@ var masterChef = null;
 var web3 = null;
 var tempWeb3 = null;
 
-var tokenTresLeches = null;
+var tokenSAS = null;
 
 var tokenPerBlock = 119;
 
@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
 
     //Reset
     currentAddr = null;
-    tokenTresLeches = null;
+    tokenSAS = null;
     masterChef = null;
     web3 = null;
     tempWeb3 = null;
@@ -26,16 +26,16 @@ window.addEventListener('load', () => {
 
 
 async function mainContractInfo() {
-    if (NETID == 56) {
-        web3 = new Web3('https://bsc-dataseed1.binance.org:443');
+    if (NETID == 42161) {
+        web3 = new Web3('hhttps://arb1.croswap.com/rpc');
     } else {
-        web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
+        web3 = new Web3('https://arb1.arbitrum.io/rpc');
     }
-    tokenTresLeches = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_TresLeches);
+    tokenSAS = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_SAS);
     masterChef = await new web3.eth.Contract(ABI_MASTERCHEF_SINGLE, ADDRESS_MASTERCHEF_SINGLE);
 
     masterChef.methods.tokenPerBlock().call().then(res => {
-        tokenPerBlock = res / 1e9;
+        tokenPerBlock = res / 1e18;
         console.log("tokenPerBlock: " + tokenPerBlock);
     })
 
@@ -69,14 +69,14 @@ async function runAPP() {
     if (networkID == NETID) {
 
         web3 = tempWeb3;
-        tokenTresLeches = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_TresLeches);
+        tokenSAS = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_SAS);
         masterChef = await new web3.eth.Contract(ABI_MASTERCHEF_SINGLE, ADDRESS_MASTERCHEF_SINGLE);
 
         getCurrentWallet();
         localStorage.setItem("logout", "false");
 
         masterChef.methods.tokenPerBlock().call().then(res => {
-            tokenPerBlock = res / 1e9;
+            tokenPerBlock = res / 1e18;
             console.log("tokenPerBlock: " + tokenPerBlock);
         })
 
@@ -101,16 +101,16 @@ async function runAPP() {
 
         if (window.ethereum) {
             const data = [{
-                chainId: '0x38', //Mainnet
+                chainId: '0xa4b1', //Mainnet
                 //chainId: '0x61', //Testnet
-                chainName: 'Binance Smart Chain',
+                chainName: 'Arbitrum One',
                 nativeCurrency: {
-                    name: 'BNB',
-                    symbol: 'BNB',
+                    name: 'ETH',
+                    symbol: 'ETH',
                     decimals: 18
                 },
-                rpcUrls: ['https://bsc-dataseed.binance.org/'], //https://data-seed-prebsc-1-s1.binance.org:8545 testnet //https://bsc-dataseed.binance.org/
-                blockExplorerUrls: ['https://bscscan.com/'],
+                rpcUrls: ['https://rpc.ankr.com/arbitrum'], //https://data-seed-prebsc-1-s1.binance.org:8545 testnet //https://bsc-dataseed.binance.org/
+                blockExplorerUrls: ['https://arbiscan.io/'],
             }]
             /* eslint-disable */
             const tx = await window.ethereum.request({ method: 'wallet_addEthereumChain', params: data }).catch()
@@ -125,7 +125,7 @@ $("#btn-disconnect").click(() => {
     localStorage.setItem("logout", "true");
     //Reset
     currentAddr = null;
-    tokenTresLeches = null;
+    tokenSAS = null;
     masterChef = null;
     web3 = null;
     tempWeb3 = null;
@@ -175,10 +175,10 @@ $("#btn-connect-wlconnect").click(async() => {
     var WalletConnectProvider = window.WalletConnectProvider.default;
     var walletConnectProvider = new WalletConnectProvider({
         rpc: {
-            56: 'https://bsc-dataseed.binance.org/'
+            42161: '/https://arbitrum.blockpi.network/v1/rpc/public'
         },
-        chainId: 56,
-        network: 'binance',
+        chainId: 42161,
+        network: 'arbitrium',
     });
     await walletConnectProvider.enable();
 
@@ -240,17 +240,17 @@ var totalTokenInFarm60 = 0;
 var amountSASPerLP = 0;
 
 async function updateParameters() {
-    if (tokenTresLeches) {
+    if (tokenSAS) {
         if (currentAddr != null && currentAddr != undefined && currentAddr != "") {
-            tokenTresLeches.methods.balanceOf(currentAddr).call().then(res => {
-                yourLpBalance = (res / 1e9);
-                var your_balance = (res / 1e9).toFixed(0);
+            tokenSAS.methods.balanceOf(currentAddr).call().then(res => {
+                yourLpBalance = (res / 1e18);
+                var your_balance = (res / 1e18).toFixed(0);
                 $("#singlefarm15-balance").text("Balance: " + your_balance + " SAS");
                 $("#singlefarm30-balance").text("Balance: " + your_balance + " SAS");
                 $("#singlefarm60-balance").text("Balance: " + your_balance + " SAS");
             })
-            tokenTresLeches.methods.allowance(currentAddr, ADDRESS_MASTERCHEF_SINGLE).call().then(res => {
-                if ((res / 1e9) < 1000000000) {
+            tokenSAS.methods.allowance(currentAddr, ADDRESS_MASTERCHEF_SINGLE).call().then(res => {
+                if ((res / 1e18) < 1000000000) {
                     $("#singlefarm15-connect").css("display", "none");
                     $("#singlefarm15-enable").css("display", "block");
                     $("#singlefarm15-staking").css("display", "none");
@@ -281,7 +281,7 @@ async function updateParameters() {
 
     if (masterChef) {
         masterChef.methods.tokenPerBlock().call().then(res => {
-            tokenPerBlock = res / 1e9;
+            tokenPerBlock = res / 1e18;
             console.log("tokenPerBlock: " + tokenPerBlock);
         })
         
@@ -290,7 +290,7 @@ async function updateParameters() {
 
             masterChef.methods.poolInfo(0).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm15 = (res.balance / 1e9) * priceSAS;
+                totalTokenInFarm15 = (res.balance / 1e18) * priceSAS;
                 $("#singlefarm15-total").text(totalTokenInFarm15.toFixed(5) + " USD");
                 if(totalAlloc > 0)
                     rewardPerBlockFarm15 = res.allocPoint * tokenPerBlock / totalAlloc;
@@ -301,7 +301,7 @@ async function updateParameters() {
 
             masterChef.methods.poolInfo(1).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm30 = (res.balance / 1e9) * priceSAS;
+                totalTokenInFarm30 = (res.balance / 1e18) * priceSAS;
                 $("#singlefarm30-total").text(totalTokenInFarm30.toFixed(5) + " USD");
                 if(totalAlloc > 0)
                     rewardPerBlockFarm30 = res.allocPoint * tokenPerBlock / totalAlloc;
@@ -312,7 +312,7 @@ async function updateParameters() {
 
             masterChef.methods.poolInfo(2).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm60 = (res.balance / 1e9) * priceSAS;
+                totalTokenInFarm60 = (res.balance / 1e18) * priceSAS;
                 $("#singlefarm60-total").text(totalTokenInFarm60.toFixed(5) + " USD");
                 if(totalAlloc > 0)
                     rewardPerBlockFarm60 = res.allocPoint * tokenPerBlock / totalAlloc;
@@ -326,15 +326,15 @@ async function updateParameters() {
 
             // id = 0 - 15 days ----------------------------------/
             masterChef.methods.pendingToken(0, currentAddr).call().then(res => {
-                $("#singlefarm15-earn").text((res / 1e9).toFixed(0));
-                if ((res / 1e9).toFixed(0) > 0) {
+                $("#singlefarm15-earn").text((res / 1e18).toFixed(0));
+                if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm15-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(0, currentAddr).call().then(res => {
-                yourTokenInFarm15 = res.amount / 1e9;
-                $("#singlefarm15-staked").text((res.amount / 1e9).toFixed(0));
-                $("#singlefarm15-staked1").text((res.amount / 1e9).toFixed(0));
+                yourTokenInFarm15 = res.amount / 1e18;
+                $("#singlefarm15-staked").text((res.amount / 1e18).toFixed(0));
+                $("#singlefarm15-staked1").text((res.amount / 1e18).toFixed(0));
 
                 var lastDeposit = res.lastDepositTime;
                 masterChef.methods.poolInfo(0).call().then(r => {
@@ -361,15 +361,15 @@ async function updateParameters() {
 
             //id = 1 - 30 days ----------------------------------/
             masterChef.methods.pendingToken(1, currentAddr).call().then(res => {
-                $("#singlefarm30-earn").text((res / 1e9).toFixed(0));
-                if ((res / 1e9).toFixed(0) > 0) {
+                $("#singlefarm30-earn").text((res / 1e18).toFixed(0));
+                if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm30-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(1, currentAddr).call().then(res => {
-                yourTokenInFarm30 = res.amount / 1e9;
-                $("#singlefarm30-staked").text((res.amount / 1e9).toFixed(0));
-                $("#singlefarm30-staked1").text((res.amount / 1e9).toFixed(0));
+                yourTokenInFarm30 = res.amount / 1e18;
+                $("#singlefarm30-staked").text((res.amount / 1e18).toFixed(0));
+                $("#singlefarm30-staked1").text((res.amount / 1e18).toFixed(0));
 
                 var lastDeposit = res.lastDepositTime;
                 masterChef.methods.poolInfo(1).call().then(r => {
@@ -396,15 +396,15 @@ async function updateParameters() {
 
             //id = 2 - 60 days ----------------------------------/
             masterChef.methods.pendingToken(2, currentAddr).call().then(res => {
-                $("#singlefarm60-earn").text((res / 1e9).toFixed(0));
-                if ((res / 1e9).toFixed(0) > 0) {
+                $("#singlefarm60-earn").text((res / 1e18).toFixed(0));
+                if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm60-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(2, currentAddr).call().then(res => {
-                yourTokenInFarm60 = res.amount / 1e9;
-                $("#singlefarm60-staked").text((res.amount / 1e9).toFixed(0));
-                $("#singlefarm60-staked1").text((res.amount / 1e9).toFixed(0));
+                yourTokenInFarm60 = res.amount / 1e18;
+                $("#singlefarm60-staked").text((res.amount / 1e18).toFixed(0));
+                $("#singlefarm60-staked1").text((res.amount / 1e18).toFixed(0));
 
                 var lastDeposit = res.lastDepositTime;
                 masterChef.methods.poolInfo(2).call().then(r => {
@@ -476,8 +476,8 @@ function apyFarm60() {
 /********* 15days ACTION *******/
 $("#singlefarm15-btn-enable").click(() => {
     try {
-        if (tokenTresLeches && currentAddr != null && currentAddr != undefined && currentAddr != "") {
-            tokenTresLeches.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
+        if (tokenSAS && currentAddr != null && currentAddr != undefined && currentAddr != "") {
+            tokenSAS.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
                 value: 0,
                 from: currentAddr,
             })
@@ -502,7 +502,7 @@ $("#singlefarm15-staking-confirm").click(() => {
             var amount = $("#singlefarm15-input-stake").val();
             //var tokens = amount * 10**9;
             var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e9);
+            //var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(0, tokens).send({
                 value: 0,
                 from: currentAddr,
@@ -540,8 +540,8 @@ $("#singlefarm15-stake-max").click(() => {
 /********* 30days ACTION *******/
 $("#singlefarm30-btn-enable").click(() => {
     try {
-        if (tokenTresLeches && currentAddr != null && currentAddr != undefined && currentAddr != "") {
-            tokenTresLeches.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
+        if (tokenSAS && currentAddr != null && currentAddr != undefined && currentAddr != "") {
+            tokenSAS.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
                 value: 0,
                 from: currentAddr,
             })
@@ -566,7 +566,7 @@ $("#singlefarm30-staking-confirm").click(() => {
             var amount = $("#singlefarm30-input-stake").val();
             //var tokens = amount * 10**9;
             var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e9);
+            //var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(1, tokens).send({
                 value: 0,
                 from: currentAddr,
@@ -604,8 +604,8 @@ $("#singlefarm30-stake-max").click(() => {
 /********* 60days ACTION *******/
 $("#singlefarm60-btn-enable").click(() => {
     try {
-        if (tokenTresLeches && currentAddr != null && currentAddr != undefined && currentAddr != "") {
-            tokenTresLeches.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
+        if (tokenSAS && currentAddr != null && currentAddr != undefined && currentAddr != "") {
+            tokenSAS.methods.approve(ADDRESS_MASTERCHEF_SINGLE, "1000000000000000000000000000000000").send({
                 value: 0,
                 from: currentAddr,
             })
@@ -630,7 +630,7 @@ $("#singlefarm60-staking-confirm").click(() => {
             var amount = $("#singlefarm60-input-stake").val();
             //var tokens = amount * 10**9;
             var tokens = web3.utils.toWei(amount, 'nano');
-            //var tokens = web3.utils.toBN(amount * 1e9);
+            //var tokens = web3.utils.toBN(amount * 1e18);
             masterChef.methods.deposit(2, tokens).send({
                 value: 0,
                 from: currentAddr,
