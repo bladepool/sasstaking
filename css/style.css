@@ -477,7 +477,7 @@ body {
     outline: 0px;
     height: 32px;
     padding: 25px 20px;
-    background-color: rgb(207 46 46/1);
+    background-color: rgb(173, 15, 241);
     color: rgb(255 255 255/1);
     transition: border .4s ease 0s,box-shadow .4s ease 0s;
 }
@@ -866,7 +866,7 @@ nav {
 }
 
 .earn-but {
-    background-color: rgb(207 46 46/1);
+    background-color: rgb(159, 18, 210);
     border-color: rgb(255 255 255);
     box-shadow: none;
     border: none;
@@ -901,8 +901,8 @@ nav {
 }
 
 .btn-modal.btn-getmore:hover {
-	color: rgb(207 46 46/1);
-	border : 2px solid rgb(207 46 46/.8);
+	color: rgb(207, 46, 188);
+	border : 2px solid rgba(204, 46, 207, 0.8);
 }
 
 .btn-modal.btn-getmore{
@@ -942,7 +942,7 @@ nav {
 }
 
 .con-wallet:hover {
-	background-color: rgb(207 46 46/1);
+	background-color: rgb(132, 46, 207);
 	box-shadow : none;
 }
 .con-wallet {
@@ -960,7 +960,7 @@ nav {
     outline: 0px;
     height: 48px;
     padding: 0px 24px;
-    background-color: rgb(207 46 46/1);
+    background-color: rgb(191, 14, 214);
     color: rgb(255 255 255/1);
     width: 100%;
     transition: border .4s ease 0s,background-color .4s ease 0s,box-shadow .4s ease 0s;
@@ -1102,7 +1102,7 @@ li {
     line-height: 1;
     outline: 0px;
     font-size: 12px;
-    background-color: rgb(207 46 46/1);
+    background-color: rgb(151, 46, 207);
     box-shadow: none;
     color: rgb(255 255 255/1);
     padding: 4px 16px;
@@ -1230,7 +1230,7 @@ li {
 
 .wall-alert {
     align-self: center;
-    fill: rgb(255, 178, 55);
+    fill: rgb(173, 37, 237);
     flex-shrink: 0;
 }
 
@@ -1393,7 +1393,7 @@ a.whitepage:hover {
     padding-left: 15px;
     padding-right: 15px;
     cursor: pointer;
-	box-shadow: rgba(246, 244, 244, 0.6) 0px 1px 4px 0px;
+	box-shadow: rgba(246, 244, 246, 0.6) 0px 1px 4px 0px;
 	transition: border .4s ease 0s,background-color .4s ease 0s;
 }
 

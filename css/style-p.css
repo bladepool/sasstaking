@@ -880,7 +880,7 @@ li {
 
 .wall-alert {
     align-self: center;
-    fill: rgb(255, 178, 55);
+    fill: rgb(255, 55, 238);
     flex-shrink: 0;
 }
 
