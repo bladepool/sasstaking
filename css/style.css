@@ -19,7 +19,7 @@
     color: white;
 }
 .balance-val {
-    color: rgb(14, 14, 14);
+    color: rgb(243, 242, 242);
 }
 .sw-price {
     display: flex;
@@ -711,12 +711,12 @@ nav {
 
 .apy-text,
 .end-in {
-    color: black;
+    color: rgb(246, 244, 244);
     font-size: 20px;
 }
 
 .total {
-    color: black;
+    color: rgb(251, 249, 249);
     display: flex;
     align-items: center;
 }
@@ -727,7 +727,7 @@ nav {
 
 .apy-val,
 .end-val {
-    color: black;
+    color: rgb(246, 243, 243);
     font-size: 20px;
 }
 
