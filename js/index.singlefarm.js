@@ -6,7 +6,7 @@ var tempWeb3 = null;
 
 var tokenSAS = null;
 
-var tokenPerBlock = 119;
+var tokenPerBlock = 48;
 
 window.addEventListener('load', () => {
 
