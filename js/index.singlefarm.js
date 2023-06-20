@@ -283,8 +283,8 @@ async function updateParameters() {
             //console.log("tokenPerBlock: " + tokenPerBlock);
         })
         
-        masterChef.methods.totalAllocPoint().call().then(res => {
-            var totalAlloc = res;
+        masterChef.methods.APR_TIME().call().then(res => {
+            //var totalAlloc = res;
 
             masterChef.methods.poolInfo(0).call().then(res => {
                 // Calculate total in USD in this pool
