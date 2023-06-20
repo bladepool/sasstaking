@@ -34,11 +34,6 @@ async function mainContractInfo() {
     tokenSAS = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_SAS);
     masterChef = await new web3.eth.Contract(ABI_MASTERCHEF_SINGLE, ADDRESS_MASTERCHEF_SINGLE);
 
-    masterChef.methods.APR_TIME().call().then(res => {
-        //tokenPerBlock = res / 1e18;
-        //console.log("tokenPerBlock: " + tokenPerBlock);
-    }
-    )
 
     update();
 }
@@ -278,19 +273,13 @@ async function updateParameters() {
     }
 
     if (masterChef) {
-        masterChef.methods.APR_TIME().call().then(res => {
-           // tokenPerBlock = res / 1e18;
-            //console.log("tokenPerBlock: " + tokenPerBlock);
-        })
         
-        masterChef.methods.APR_TIME().call().then(res => {
-            //var totalAlloc = res;
 
             masterChef.methods.poolInfo(0).call().then(res => {
                 // Calculate total in USD in this pool
                 totalTokenInFarm15 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm15-total").text(totalTokenInFarm15.toFixed(5) + " USD");
-                $("#singlefarm15-api").text(res.poolApr/10000 + "%");
+                $("#singlefarm15-api").text(res.poolApr/100 + "%");
                 //apyFarm15();
             })
 
@@ -298,7 +287,7 @@ async function updateParameters() {
                 // Calculate total in USD in this pool
                 totalTokenInFarm30 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm30-total").text(totalTokenInFarm30.toFixed(5) + " USD");
-                $("#singlefarm30-api").text(res.poolApr/10000 + "%");
+                $("#singlefarm30-api").text(res.poolApr/100 + "%");
                 //$("#singlefarm30-api").text(res.apy.toFixed(0) + "%");
                     //apyFarm30();
             })
@@ -307,11 +296,10 @@ async function updateParameters() {
                 // Calculate total in USD in this pool
                 totalTokenInFarm60 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm60-total").text(totalTokenInFarm60.toFixed(5) + " USD");
-                $("#singlefarm60-api").text(res.poolApr/10000 + "%");
+                $("#singlefarm60-api").text(res.poolApr/100 + "%");
                 //$("#singlefarm60-api").text(res.apy.toFixed(0) + "%");
                 //apyFarm60();
             })
-        })
 
         if (currentAddr != null && currentAddr != undefined && currentAddr != "") {
 
