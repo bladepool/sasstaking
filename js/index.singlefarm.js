@@ -6,7 +6,7 @@ var tempWeb3 = null;
 
 var tokenSAS = null;
 
-var tokenPerBlock = 48;
+//var tokenPerBlock = 48;
 
 window.addEventListener('load', () => {
 
@@ -34,10 +34,11 @@ async function mainContractInfo() {
     tokenSAS = await new web3.eth.Contract(ABI_TOKEN, ADDRESS_SAS);
     masterChef = await new web3.eth.Contract(ABI_MASTERCHEF_SINGLE, ADDRESS_MASTERCHEF_SINGLE);
 
-    masterChef.methods.tokenPerBlock().call().then(res => {
-        tokenPerBlock = res / 1e18;
-        console.log("tokenPerBlock: " + tokenPerBlock);
-    })
+    masterChef.methods.APR_TIME().call().then(res => {
+        //tokenPerBlock = res / 1e18;
+        //console.log("tokenPerBlock: " + tokenPerBlock);
+    }
+    )
 
     update();
 }
@@ -277,9 +278,9 @@ async function updateParameters() {
     }
 
     if (masterChef) {
-        masterChef.methods.tokenPerBlock().call().then(res => {
-            tokenPerBlock = res / 1e18;
-            console.log("tokenPerBlock: " + tokenPerBlock);
+        masterChef.methods.APR_TIME().call().then(res => {
+           // tokenPerBlock = res / 1e18;
+            //console.log("tokenPerBlock: " + tokenPerBlock);
         })
         
         masterChef.methods.totalAllocPoint().call().then(res => {
