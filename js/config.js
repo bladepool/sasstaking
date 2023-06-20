@@ -767,7 +767,7 @@ $.getJSON('https://arbitrum.api.0x.org/swap/v1/quote?buyToken=' + ADDRESS_SAS + 
     //$.getJSON('https://polygon.api.0x.org/swap/v1/quote?buyToken=0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270&sellToken=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&sellAmount=1000000', function(data) {
     if (data && data.price) {
         priceSAS = (1 / data.price);
-        $('#SAS-price').text("$ " + price3.toFixed(11));
+        $('#SAS-price').text("$ " + priceSAS.toFixed(11));
         $('#price').text("$ " + priceSAS.toFixed(11));
     }
     $('#SAS-price').text("$ " + priceSAS.toFixed(11));
