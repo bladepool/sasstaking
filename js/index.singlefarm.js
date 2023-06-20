@@ -75,10 +75,7 @@ async function runAPP() {
         getCurrentWallet();
         localStorage.setItem("logout", "false");
 
-        masterChef.methods.tokenPerBlock().call().then(res => {
-            tokenPerBlock = res / 1e18;
-            console.log("tokenPerBlock: " + tokenPerBlock);
-        })
+
 
         //singlefarm30
         $("#singlefarm30-connect").css("display", "none");
@@ -290,33 +287,26 @@ async function updateParameters() {
 
             masterChef.methods.poolInfo(0).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm15 = (res.balance / 1e18) * priceSAS;
+                totalTokenInFarm15 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm15-total").text(totalTokenInFarm15.toFixed(5) + " USD");
-                if(totalAlloc > 0)
-                    rewardPerBlockFarm15 = res.allocPoint * tokenPerBlock / totalAlloc;
-                //$("#singlefarm15-api").text(res.apy + "%");
-                $("#singlefarm15-api").text(res.allocPoint + "%");
+                $("#singlefarm15-api").text(res.poolApr/10000 + "%");
                 //apyFarm15();
             })
 
             masterChef.methods.poolInfo(1).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm30 = (res.balance / 1e18) * priceSAS;
+                totalTokenInFarm30 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm30-total").text(totalTokenInFarm30.toFixed(5) + " USD");
-                if(totalAlloc > 0)
-                    rewardPerBlockFarm30 = res.allocPoint * tokenPerBlock / totalAlloc;
-                $("#singlefarm30-api").text(res.allocPoint + "%");
+                $("#singlefarm30-api").text(res.poolApr/10000 + "%");
                 //$("#singlefarm30-api").text(res.apy.toFixed(0) + "%");
                     //apyFarm30();
             })
 
             masterChef.methods.poolInfo(2).call().then(res => {
                 // Calculate total in USD in this pool
-                totalTokenInFarm60 = (res.balance / 1e18) * priceSAS;
+                totalTokenInFarm60 = (res.totalDeposit / 1e18) * priceSAS;
                 $("#singlefarm60-total").text(totalTokenInFarm60.toFixed(5) + " USD");
-                if(totalAlloc > 0)
-                    rewardPerBlockFarm60 = res.allocPoint * tokenPerBlock / totalAlloc;
-                $("#singlefarm60-api").text(res.allocPoint + "%");
+                $("#singlefarm60-api").text(res.poolApr/10000 + "%");
                 //$("#singlefarm60-api").text(res.apy.toFixed(0) + "%");
                 //apyFarm60();
             })
@@ -325,18 +315,18 @@ async function updateParameters() {
         if (currentAddr != null && currentAddr != undefined && currentAddr != "") {
 
             // id = 0 - 15 days ----------------------------------/
-            masterChef.methods.pendingToken(0, currentAddr).call().then(res => {
+            masterChef.methods.pendingReward(0, currentAddr).call().then(res => {
                 $("#singlefarm15-earn").text((res / 1e18).toFixed(0));
                 if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm15-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(0, currentAddr).call().then(res => {
-                yourTokenInFarm15 = res.amount / 1e18;
-                $("#singlefarm15-staked").text((res.amount / 1e18).toFixed(0));
-                $("#singlefarm15-staked1").text((res.amount / 1e18).toFixed(0));
+                yourTokenInFarm15 = res.depositAmount / 1e18;
+                $("#singlefarm15-staked").text((res.depositAmount / 1e18).toFixed(0));
+                $("#singlefarm15-staked1").text((res.depositAmount / 1e18).toFixed(0));
 
-                var lastDeposit = res.lastDepositTime;
+                var lastDeposit = res.lastDeposit;
                 masterChef.methods.poolInfo(0).call().then(r => {
                     $("#singlefarm15-locking-time").text((r.withdrawLockPeriod / 86400).toFixed(0) + " days");
                     if(lastDeposit == 0){
@@ -360,18 +350,18 @@ async function updateParameters() {
             })
 
             //id = 1 - 30 days ----------------------------------/
-            masterChef.methods.pendingToken(1, currentAddr).call().then(res => {
+            masterChef.methods.pendingReward(1, currentAddr).call().then(res => {
                 $("#singlefarm30-earn").text((res / 1e18).toFixed(0));
                 if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm30-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(1, currentAddr).call().then(res => {
-                yourTokenInFarm30 = res.amount / 1e18;
-                $("#singlefarm30-staked").text((res.amount / 1e18).toFixed(0));
-                $("#singlefarm30-staked1").text((res.amount / 1e18).toFixed(0));
+                yourTokenInFarm30 = res.depositAmount / 1e18;
+                $("#singlefarm30-staked").text((res.depositAmount / 1e18).toFixed(0));
+                $("#singlefarm30-staked1").text((res.depositAmount / 1e18).toFixed(0));
 
-                var lastDeposit = res.lastDepositTime;
+                var lastDeposit = res.lastDeposit;
                 masterChef.methods.poolInfo(1).call().then(r => {
                     $("#singlefarm30-locking-time").text((r.withdrawLockPeriod / 86400).toFixed(0) + " days");
                     if(lastDeposit == 0){
@@ -395,18 +385,18 @@ async function updateParameters() {
             })
 
             //id = 2 - 60 days ----------------------------------/
-            masterChef.methods.pendingToken(2, currentAddr).call().then(res => {
+            masterChef.methods.pendingReward(2, currentAddr).call().then(res => {
                 $("#singlefarm60-earn").text((res / 1e18).toFixed(0));
                 if ((res / 1e18).toFixed(0) > 0) {
                     $("#singlefarm60-collect").addClass("enable");
                 }
             });
             masterChef.methods.userInfo(2, currentAddr).call().then(res => {
-                yourTokenInFarm60 = res.amount / 1e18;
-                $("#singlefarm60-staked").text((res.amount / 1e18).toFixed(0));
-                $("#singlefarm60-staked1").text((res.amount / 1e18).toFixed(0));
+                yourTokenInFarm60 = res.depositAmount / 1e18;
+                $("#singlefarm60-staked").text((res.depositAmount / 1e18).toFixed(0));
+                $("#singlefarm60-staked1").text((res.depositAmount / 1e18).toFixed(0));
 
-                var lastDeposit = res.lastDepositTime;
+                var lastDeposit = res.lastDeposit;
                 masterChef.methods.poolInfo(2).call().then(r => {
                     $("#singlefarm60-locking-time").text((r.withdrawLockPeriod / 86400).toFixed(0) + " days");
                     if(lastDeposit == 0){
