@@ -763,14 +763,14 @@ let ABI_MASTERCHEF_SINGLE = [
 ]
 var priceSAS = 0;
 
-$.getJSON('https://arbitrum.api.0x.org/swap/v1/quote?buyToken=' + ADDRESS_SAS + '&sellToken=WETH&sellAmount=1000000&excludedSources=Uniswap,BakerySwap,Belt,DODO,DODO_V2,Ellipsis,Mooniswap,MultiHop,Nerve,Smoothy,ApeSwap,CafeSwap,CheeseSwap,JulSwap,LiquidityProvider&slippagePercentage=0&gasPrice=0', function(data) {
+$.getJSON('https://arbitrum.api.0x.org/swap/v1/quote?buyToken=' + ADDRESS_SAS + '&sellToken=WETH&sellAmount=1000000&slippagePercentage=0&gasPrice=0', function(data) {
     //$.getJSON('https://polygon.api.0x.org/swap/v1/quote?buyToken=0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270&sellToken=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&sellAmount=1000000', function(data) {
     if (data && data.price) {
         priceSAS = (1 / data.price);
-        $('#SAS-price').text("$ " + priceSAS.toFixed(9));
-        $('#price').text("$ " + priceSAS.toFixed(9));
+        $('#SAS-price').text("$ " + priceSAS.toFixed(8));
+        $('#price').text("$ " + priceSAS.toFixed(8));
     }
-    $('#SAS-price').text("$ " + priceSAS.toFixed(9));
-    $('#price').text("$ " + priceSAS.toFixed(9));
+    $('#SAS-price').text("$ " + priceSAS.toFixed(8));
+    $('#price').text("$ " + priceSAS.toFixed(8));
     console.log("Get price");
 });
